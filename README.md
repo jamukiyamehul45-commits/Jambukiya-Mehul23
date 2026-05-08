@@ -741,7 +741,7 @@
         <!-- CHANGE IMAGE NAME HERE -->
         <img src="mehul.jpeg" alt="Mehul">
 
-        <div class="floating-card card1">
+       <!-- <div class="floating-card card1">
           <i class="fas fa-gamepad"></i>
           Unity Developer
         </div>
@@ -749,7 +749,7 @@
         <div class="floating-card card2">
           <i class="fas fa-code"></i>
           Android Developer
-        </div>
+        </div>-->
 
       </div>
 
