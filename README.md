@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mehul Jambukiya | Game Developer Portfolio</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Plus Jakarta Sans',sans-serif;
+      background:linear-gradient(145deg,#f8fafc 0%,#eef2ff 100%);
+      color:#0f172a;
+      overflow-x:hidden;
+    }
+
+    /* =========================
+       BACKGROUND BLOBS
+    ========================== */
+
+    .blob-bg{
+      position:fixed;
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      z-index:-2;
+      top:0;
+      left:0;
+    }
+
+    .blob{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(60px);
+      animation:floatBlob 20s infinite alternate ease-in-out;
+    }
+
+    .blob1{
+      width:400px;
+      height:400px;
+      background:rgba(59,130,246,0.15);
+      top:-100px;
+      left:-100px;
+    }
+
+    .blob2{
+      width:500px;
+      height:500px;
+      background:rgba(168,85,247,0.12);
+      bottom:-150px;
+      right:-100px;
+    }
+
+    .blob3{
+      width:300px;
+      height:300px;
+      background:rgba(236,72,153,0.1);
+      top:40%;
+      right:20%;
+    }
+
+    @keyframes floatBlob{
+      0%{
+        transform:translate(0,0) scale(1);
+      }
+      100%{
+        transform:translate(70px,50px) scale(1.2);
+      }
+    }
+
+    /* =========================
+       CURSOR
+    ========================== */
+
+    .cursor-follower{
+      width:40px;
+      height:40px;
+      border:2px solid #3b82f6;
+      border-radius:50%;
+      position:fixed;
+      pointer-events:none;
+      transform:translate(-50%,-50%);
+      z-index:9999;
+      opacity:0;
+      transition:0.08s ease-out;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================== */
+
+    .navbar{
+      position:fixed;
+      top:20px;
+      left:50%;
+      transform:translateX(-50%);
+      width:90%;
+      max-width:1200px;
+      padding:0.9rem 2rem;
+      background:rgba(255,255,255,0.85);
+      backdrop-filter:blur(12px);
+      border-radius:80px;
+      border:1px solid rgba(59,130,246,0.15);
+      z-index:1000;
+      box-shadow:0 8px 30px rgba(0,0,0,0.05);
+    }
+
+    .nav-container{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .logo{
+      font-size:1.5rem;
+      font-weight:800;
+      background:linear-gradient(135deg,#2563eb,#7c3aed);
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+
+    .nav-links{
+      display:flex;
+      list-style:none;
+      gap:2rem;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:#0f172a;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:#2563eb;
+    }
+
+    .menu-toggle{
+      display:none;
+      font-size:1.6rem;
+      cursor:pointer;
+      color:#2563eb;
+    }
+
+    /* =========================
+       CONTAINER
+    ========================== */
+
+    .container{
+      width:100%;
+      max-width:1200px;
+      margin:auto;
+      padding:0 2rem;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      padding-top:7rem;
+    }
+
+    .hero-wrapper{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:4rem;
+      flex-wrap:wrap;
+      width:100%;
+    }
+
+    .hero-content{
+      flex:1;
+      min-width:300px;
+    }
+
+    .hero-tag{
+      display:inline-block;
+      padding:0.4rem 1rem;
+      border-radius:40px;
+      background:#dbeafe;
+      color:#1d4ed8;
+      font-weight:600;
+      margin-bottom:1.2rem;
+      font-size:0.9rem;
+    }
+
+    .hero-content h1{
+      font-size:4rem;
+      line-height:1.1;
+      font-weight:800;
+      background:linear-gradient(to right,#0f172a,#2563eb,#7c3aed);
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+
+    .sub-title{
+      margin-top:1rem;
+      font-size:1.3rem;
+      color:#334155;
+      font-weight:600;
+    }
+
+    .hero-content p{
+      margin-top:1.4rem;
+      max-width:600px;
+      color:#475569;
+      line-height:1.8;
+      font-size:1rem;
+    }
+
+    /* =========================
+       BUTTONS
+    ========================== */
+
+    .btn-group{
+      display:flex;
+      gap:1rem;
+      margin-top:2rem;
+      flex-wrap:wrap;
+    }
+
+    .btn-primary{
+      padding:0.9rem 2rem;
+      border:none;
+      border-radius:60px;
+      background:#2563eb;
+      color:white;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.3s;
+      box-shadow:0 10px 20px rgba(37,99,235,0.2);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-5px);
+      background:#1d4ed8;
+    }
+
+    .btn-outline{
+      background:transparent;
+      border:2px solid #2563eb;
+      color:#2563eb;
+    }
+
+    /* =========================
+       STATS
+    ========================== */
+
+    .stats-row{
+      display:flex;
+      gap:1rem;
+      flex-wrap:wrap;
+      margin-top:2rem;
+    }
+
+    .stat-item{
+      background:white;
+      padding:0.8rem 1.2rem;
+      border-radius:40px;
+      box-shadow:0 6px 16px rgba(0,0,0,0.05);
+      border:1px solid #e2e8f0;
+      font-weight:600;
+    }
+
+    /* =========================
+       HERO IMAGE
+    ========================== */
+
+    .hero-image{
+      position:relative;
+      width:420px;
+      height:420px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .hero-image img{
+      width:340px;
+      height:340px;
+      object-fit:cover;
+      border-radius:50%;
+      position:relative;
+      z-index:2;
+      border:8px solid rgba(255,255,255,0.9);
+      box-shadow:
+      0 20px 50px rgba(37,99,235,0.25),
+      0 0 0 20px rgba(59,130,246,0.06);
+
+      animation:floatImage 5s ease-in-out infinite;
+    }
+
+    .image-ring{
+      position:absolute;
+      width:380px;
+      height:380px;
+      border-radius:50%;
+      background:conic-gradient(
+        from 0deg,
+        #2563eb,
+        #7c3aed,
+        #06b6d4,
+        #2563eb
+      );
+
+      animation:rotateRing 12s linear infinite;
+    }
+
+    .image-ring::after{
+      content:'';
+      position:absolute;
+      inset:15px;
+      background:#f8fafc;
+      border-radius:50%;
+    }
+
+    .floating-card{
+      position:absolute;
+      background:white;
+      padding:0.8rem 1.2rem;
+      border-radius:18px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+      z-index:5;
+      font-weight:600;
+      border:1px solid #e2e8f0;
+      animation:floatCard 4s ease-in-out infinite;
+    }
+
+    .floating-card i{
+      color:#2563eb;
+      margin-right:6px;
+    }
+
+    .card1{
+      top:40px;
+      left:-20px;
+    }
+
+    .card2{
+      bottom:40px;
+      right:-10px;
+      animation-delay:2s;
+    }
+
+    /* =========================
+       SECTION TITLE
+    ========================== */
+
+    .section-title{
+      font-size:2rem;
+      margin-bottom:2rem;
+      position:relative;
+      display:inline-block;
+    }
+
+    .section-title::after{
+      content:'';
+      position:absolute;
+      width:60%;
+      height:4px;
+      background:linear-gradient(90deg,#2563eb,#7c3aed);
+      bottom:-10px;
+      left:0;
+      border-radius:20px;
+    }
+
+    /* =========================
+       SKILLS
+    ========================== */
+
+    #skills{
+      margin-top:4rem;
+    }
+
+    .skills-grid{
+      display:flex;
+      flex-wrap:wrap;
+      gap:1rem;
+    }
+
+    .skill-bubble{
+      background:white;
+      padding:0.8rem 1.4rem;
+      border-radius:40px;
+      border:1px solid #e2e8f0;
+      font-weight:600;
+      transition:0.3s;
+      box-shadow:0 8px 20px rgba(0,0,0,0.03);
+    }
+
+    .skill-bubble:hover{
+      transform:translateY(-6px);
+      border-color:#3b82f6;
+    }
+
+    /* =========================
+       PROJECTS
+    ========================== */
+
+    #projects{
+      margin-top:5rem;
+    }
+
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:2rem;
+    }
+
+    .project-card{
+      background:white;
+      padding:2rem;
+      border-radius:28px;
+      transition:0.4s;
+      box-shadow:0 10px 30px rgba(0,0,0,0.06);
+      border:1px solid rgba(0,0,0,0.04);
+    }
+
+    .project-card:hover{
+      transform:translateY(-10px);
+    }
+
+    .project-card h3{
+      margin-bottom:1rem;
+    }
+
+    .project-card p{
+      color:#475569;
+      line-height:1.7;
+    }
+
+    .tech-stack{
+      display:flex;
+      flex-wrap:wrap;
+      gap:0.5rem;
+      margin-top:1rem;
+    }
+
+    .tech-pill{
+      padding:0.3rem 0.8rem;
+      background:#dbeafe;
+      border-radius:30px;
+      font-size:0.75rem;
+      color:#1d4ed8;
+      font-weight:700;
+    }
+
+    /* =========================
+       EDUCATION
+    ========================== */
+
+    #education{
+      margin-top:5rem;
+    }
+
+    .edu-card{
+      background:white;
+      padding:1.5rem;
+      border-radius:24px;
+      margin-bottom:1rem;
+      border-left:5px solid #2563eb;
+      box-shadow:0 8px 20px rgba(0,0,0,0.03);
+    }
+
+    /* =========================
+       CONTACT
+    ========================== */
+
+    #contact{
+      margin-top:5rem;
+    }
+
+    .contact-box{
+      background:white;
+      padding:2rem;
+      border-radius:30px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:1.5rem;
+      justify-content:space-between;
+      box-shadow:0 8px 20px rgba(0,0,0,0.03);
+    }
+
+    .contact-item{
+      font-weight:600;
+      color:#334155;
+    }
+
+    .contact-item i{
+      color:#2563eb;
+      margin-right:8px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer{
+      margin-top:5rem;
+      background:#0f172a;
+      color:#cbd5e1;
+      text-align:center;
+      padding:2rem;
+      border-radius:40px 40px 0 0;
+    }
+
+    /* =========================
+       ANIMATIONS
+    ========================== */
+
+    @keyframes rotateRing{
+      from{
+        transform:rotate(0deg);
+      }
+      to{
+        transform:rotate(360deg);
+      }
+    }
+
+    @keyframes floatImage{
+      0%{
+        transform:translateY(0px);
+      }
+      50%{
+        transform:translateY(-15px);
+      }
+      100%{
+        transform:translateY(0px);
+      }
+    }
+
+    @keyframes floatCard{
+      0%{
+        transform:translateY(0px);
+      }
+      50%{
+        transform:translateY(-10px);
+      }
+      100%{
+        transform:translateY(0px);
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media(max-width:900px){
+
+      .hero-wrapper{
+        flex-direction:column-reverse;
+        text-align:center;
+      }
+
+      .hero-content h1{
+        font-size:2.8rem;
+      }
+
+      .hero-image{
+        width:100%;
+        height:auto;
+      }
+
+      .hero-image img{
+        width:260px;
+        height:260px;
+      }
+
+      .image-ring{
+        width:300px;
+        height:300px;
+      }
+
+      .stats-row{
+        justify-content:center;
+      }
+
+      .btn-group{
+        justify-content:center;
+      }
+
+      .nav-links{
+        position:fixed;
+        top:90px;
+        left:-100%;
+        width:80%;
+        background:white;
+        flex-direction:column;
+        padding:2rem;
+        border-radius:20px;
+        transition:0.3s;
+        box-shadow:0 10px 30px rgba(0,0,0,0.1);
+      }
+
+      .nav-links.active{
+        left:10%;
+      }
+
+      .menu-toggle{
+        display:block;
+      }
+    }
+
+    @media(max-width:600px){
+
+      .container{
+        padding:0 1.2rem;
+      }
+
+      .hero-content h1{
+        font-size:2.2rem;
+      }
+
+      .section-title{
+        font-size:1.7rem;
+      }
+
+      .card1{
+        left:10px;
+      }
+
+      .card2{
+        right:10px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- CURSOR -->
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- BLOBS -->
+  <div class="blob-bg">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+
+      <div class="logo">⚡ Mehul.dev</div>
+
+      <div class="menu-toggle" id="mobileMenu">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+
+    <div class="container hero-wrapper">
+
+      <!-- LEFT -->
+      <div class="hero-content">
+
+        <span class="hero-tag">
+          <i class="fas fa-code"></i>
+          Fresher • Game & Web Developer
+        </span>
+
+        <h1>
+          Mehul Jambukiya
+        </h1>
+
+        <div class="sub-title">
+          BCA Graduate • Unity Enthusiast
+        </div>
+
+        <p>
+          Motivated Game Developer with CGPA 8.32 and strong passion for Unity, C#, Android Development, Firebase & immersive game experiences. Focused on building creative and interactive projects.
+        </p>
+
+        <div class="btn-group">
+          <button class="btn-primary" id="exploreBtn">
+            <i class="fas fa-rocket"></i>
+            Explore Work
+          </button>
+
+          <button class="btn-primary btn-outline" id="resumeBtn">
+            <i class="fas fa-file"></i>
+            Resume
+          </button>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-item">
+            ⭐ CGPA 8.32
+          </div>
+
+          <div class="stat-item">
+            🎮 12+ Game Prototypes
+          </div>
+
+          <div class="stat-item">
+            📱 5+ Apps
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT IMAGE -->
+      <div class="hero-image">
+
+        <div class="image-ring"></div>
+
+        <!-- CHANGE IMAGE NAME HERE -->
+        <img src="mehul.jpeg" alt="Mehul">
+
+        <div class="floating-card card1">
+          <i class="fas fa-gamepad"></i>
+          Unity Developer
+        </div>
+
+        <div class="floating-card card2">
+          <i class="fas fa-code"></i>
+          Android Developer
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- MAIN -->
+  <main class="container">
+
+    <!-- SKILLS -->
+    <section id="skills">
+
+      <h2 class="section-title">
+        <i class="fas fa-cogs"></i>
+        Technical Arsenal
+      </h2>
+
+      <div class="skills-grid">
+
+        <div class="skill-bubble">C# • Unity Engine</div>
+        <div class="skill-bubble">Java • Android Studio</div>
+        <div class="skill-bubble">Firebase Auth/DB</div>
+        <div class="skill-bubble">Python / JavaScript</div>
+        <div class="skill-bubble">Laravel (Learning)</div>
+        <div class="skill-bubble">Git & GitHub</div>
+        <div class="skill-bubble">Game Physics / AI</div>
+        <div class="skill-bubble">HTML5 / CSS3</div>
+        <div class="skill-bubble">Problem Solving</div>
+        <div class="skill-bubble">UI / UX Basics</div>
+
+      </div>
+
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+
+      <h2 class="section-title">
+        <i class="fas fa-dice-d6"></i>
+        Featured Projects
+      </h2>
+
+      <div class="projects-grid">
+
+        <div class="project-card">
+
+          <h3>Unity 3D Adventure Demo</h3>
+
+          <p>
+            Third-person controller, enemy AI, collectibles, scoring system, and smooth UI. Built using Unity Physics and C#.
+          </p>
+
+          <div class="tech-stack">
+            <span class="tech-pill">C#</span>
+            <span class="tech-pill">Unity</span>
+            <span class="tech-pill">NavMesh</span>
+          </div>
+
+        </div>
+
+        <div class="project-card">
+
+          <h3>Firebase Attendance App</h3>
+
+          <p>
+            Android attendance app with realtime database, secure authentication and separate dashboards for students & faculty.
+          </p>
+
+          <div class="tech-stack">
+            <span class="tech-pill">Android</span>
+            <span class="tech-pill">Java</span>
+            <span class="tech-pill">Firebase</span>
+          </div>
+
+        </div>
+
+        <!-- <div class="project-card">
+
+          <h3>Portfolio + Laravel</h3>
+
+          <p>
+            Full-stack web application using Laravel MVC architecture with authentication, database integration and WebGL support.
+          </p>
+
+          <div class="tech-stack">
+            <span class="tech-pill">Laravel</span>
+            <span class="tech-pill">PHP</span>
+            <span class="tech-pill">MySQL</span>
+          </div>
+
+        </div> -->
+
+      </div>
+
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+
+      <h2 class="section-title">
+        <i class="fas fa-graduation-cap"></i>
+        Education
+      </h2>
+
+      <div class="edu-card">
+        <strong>🎓 Bachelor of Computer Applications (BCA)</strong><br>
+        Gujarat University • CGPA 8.32/10
+      </div>
+
+      <div class="edu-card">
+        <strong>📖 HSC Science</strong><br>
+        81.57% • Chanakya Vidhya Sankul
+      </div>
+
+      <div class="edu-card">
+        <strong>🏫 SSC</strong><br>
+        77.33% • Vrajendra Vidhya Vihar
+      </div>
+
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+
+      <h2 class="section-title">
+        <i class="fas fa-address-card"></i>
+        Let's Connect
+      </h2>
+
+      <div class="contact-box">
+
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          +91 9265140603
+        </div>
+
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          jamukiyamehul@gmail.com
+        </div>
+
+        <div class="contact-item">
+          <i class="fab fa-linkedin"></i>
+          Jamukiya Mehul
+        </div>
+
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          Ahmedabad, Gujarat
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+
+    <p>
+      © 2026 Mehul Jambukiya • Game Developer Portfolio
+    </p>
+
+    <p style="margin-top:10px;font-size:0.9rem;">
+      Open for internships & junior developer roles
+    </p>
+
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+
+    // MOBILE MENU
+
+    const mobileMenu = document.getElementById('mobileMenu');
+    const navLinks = document.getElementById('navLinks');
+
+    mobileMenu.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // CURSOR
+
+    const cursor = document.getElementById('cursorFollower');
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      cursor.style.opacity = '0.6';
+    });
+
+    document.addEventListener('mouseleave', () => {
+      cursor.style.opacity = '0';
+    });
+
+    // EXPLORE BUTTON
+
+    const exploreBtn = document.getElementById('exploreBtn');
+
+    exploreBtn.addEventListener('click', () => {
+      document.getElementById('projects').scrollIntoView({
+        behavior:'smooth'
+      });
+    });
+
+    // RESUME BUTTON
+
+    const resumeBtn = document.getElementById('resumeBtn');
+
+    resumeBtn.addEventListener('click', () => {
+
+      alert(
+`📄 Mehul Jambukiya
+
+Game Developer & Web Developer
+
+Skills:
+• Unity
+• C#
+• Firebase
+• Android Studio
+• Laravel
+
+CGPA: 8.32`
+      );
+
+    });
+
+  </script>
+
+</body>
+</html>
