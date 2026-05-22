@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -5,6 +6,7 @@
 <title>Mehul Jambukiya — Unity Developer</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
+
   :root {
     --bg: #050a0f;
     --bg2: #080f18;
@@ -54,6 +56,54 @@
     transform: translate(-50%, -50%);
     transition: transform 0.15s, width 0.2s, height 0.2s;
   }
+  .hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+
+@media (max-width: 1000px) {
+  .hero-container {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-desc {
+    margin-inline: auto;
+  }
+
+  .hero-stats,
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-image {
+    width: 300px;
+  }
+
+  .hero-image img {
+    height: 400px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-image {
+    width: 240px;
+  }
+
+  .hero-image img {
+    height: 320px;
+  }
+}
 
   /* Scanlines overlay */
   body::before {
@@ -797,6 +847,105 @@
     .info-grid { grid-template-columns: 1fr; }
     .soft-skills-grid { grid-template-columns: repeat(2, 1fr); }
   }
+
+  /* HERO IMAGE DESIGN */
+  .hero-image {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-img-wrapper {
+    position: relative;
+    width: 340px;
+    height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-img-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(0,229,255,0.25);
+  }
+  .ring-1 { width: 340px; height: 340px; animation: spinRing 18s linear infinite; border-color: rgba(0,229,255,0.3); border-style: dashed; }
+  .ring-2 { width: 300px; height: 300px; animation: spinRing 12s linear infinite reverse; border-color: rgba(255,107,53,0.2); }
+  .ring-3 { width: 260px; height: 260px; animation: spinRing 8s linear infinite; border-color: rgba(127,255,0,0.15); border-style: dotted; }
+
+  @keyframes spinRing {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  .hero-img-circle {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--accent);
+    box-shadow: 0 0 0 6px rgba(0,229,255,0.08), 0 0 40px rgba(0,229,255,0.35), inset 0 0 30px rgba(0,229,255,0.1);
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-img-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+
+  .hero-img-badge {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, rgba(0,229,255,0.15), rgba(0,229,255,0.05));
+    border: 1px solid rgba(0,229,255,0.5);
+    color: var(--accent);
+    font-family: 'Orbitron', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    padding: 6px 16px;
+    white-space: nowrap;
+    backdrop-filter: blur(10px);
+    z-index: 3;
+    box-shadow: 0 0 12px rgba(0,229,255,0.2);
+  }
+
+  .corner-br {
+    position: absolute;
+    width: 12px; height: 12px;
+    border-color: var(--accent);
+    border-style: solid;
+    opacity: 0.6;
+    z-index: 3;
+  }
+  .c1 { top: 20px; left: 20px; border-width: 2px 0 0 2px; }
+  .c2 { top: 20px; right: 20px; border-width: 2px 2px 0 0; }
+  .c3 { bottom: 20px; left: 20px; border-width: 0 0 2px 2px; }
+  .c4 { bottom: 20px; right: 20px; border-width: 0 2px 2px 0; }
+
+  @media (max-width: 1000px) {
+    .hero-img-wrapper { width: 280px; height: 280px; }
+    .ring-1 { width: 280px; height: 280px; }
+    .ring-2 { width: 248px; height: 248px; }
+    .ring-3 { width: 216px; height: 216px; }
+    .hero-img-circle { width: 180px; height: 180px; }
+  }
+  @media (max-width: 600px) {
+    .hero-img-wrapper { width: 220px; height: 220px; }
+    .ring-1 { width: 220px; height: 220px; }
+    .ring-2 { width: 192px; height: 192px; }
+    .ring-3 { width: 164px; height: 164px; }
+    .hero-img-circle { width: 140px; height: 140px; }
+  }
 </style>
 </head>
 <body>
@@ -816,6 +965,7 @@
   </ul>
 </nav>
 
+
 <!-- HERO -->
 <section id="hero">
   <div class="grid-bg"></div>
@@ -824,33 +974,56 @@
   <div class="shape shape-3"></div>
   <div class="shape shape-4"></div>
 
-  <div class="hero-content">
-    <div class="hero-tag">Unity Developer &amp; App Builder</div>
-    <h1 class="hero-name">MEHUL<br>JAMBUKIYA</h1>
-    <p class="hero-title">BCA Graduate &nbsp;|&nbsp; Game Dev &nbsp;|&nbsp; C# / Java</p>
-    <p class="hero-desc">
-      Crafting interactive experiences with <strong style="color:var(--accent)">Unity Engine</strong> and building 
-      robust mobile apps with <strong style="color:var(--accent2)">Android Studio</strong>. 
-      Fresh graduate, ready to level up the game dev world.
-    </p>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <span class="stat-num">8.32</span>
-        <span class="stat-label">CGPA</span>
+  <div class="hero-container">
+
+    <div class="hero-content">
+      <div class="hero-tag">Unity Developer &amp; App Builder</div>
+      <h1 class="hero-name">MEHUL<br>JAMBUKIYA</h1>
+      <p class="hero-title">BCA Graduate &nbsp;|&nbsp; Game Dev &nbsp;|&nbsp; C# / Java</p>
+      <p class="hero-desc">
+        Crafting interactive experiences with <strong style="color:var(--accent)">Unity Engine</strong> and building
+        robust mobile apps with <strong style="color:var(--accent2)">Android Studio</strong>.
+        Fresh graduate, ready to level up the game dev world.
+      </p>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">8.32</span>
+          <span class="stat-label">CGPA</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">5+</span>
+          <span class="stat-label">Tech Skills</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">2026</span>
+          <span class="stat-label">Graduate</span>
+        </div>
       </div>
-      <div class="stat-item">
-        <span class="stat-num">5+</span>
-        <span class="stat-label">Tech Skills</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num">2026</span>
-        <span class="stat-label">Graduate</span>
+
+      <div class="hero-buttons">
+        <a href="mailto:jamukiyamehul23@gmail.com" class="btn btn-primary">⚡ Hire Me</a>
+        <a href="#projects" class="btn btn-outline">▶ View Work</a>
       </div>
     </div>
-    <div class="hero-buttons">
-      <a href="mailto:jamukiyamehul23@gmail.com" class="btn btn-primary">⚡ Hire Me</a>
-      <a href="#projects" class="btn btn-outline">▶ View Work</a>
+
+    <!-- RIGHT SIDE IMAGE -->
+    <div class="hero-image">
+      <div class="hero-img-wrapper">
+        <div class="hero-img-ring ring-1"></div>
+        <div class="hero-img-ring ring-2"></div>
+        <div class="hero-img-ring ring-3"></div>
+        <div class="hero-img-circle">
+            <img src="mehul.jpeg">
+        </div>
+        <div class="hero-img-badge">⚡ UNITY DEV</div>
+        <div class="corner-br c1"></div>
+        <div class="corner-br c2"></div>
+        <div class="corner-br c3"></div>
+        <div class="corner-br c4"></div>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -865,7 +1038,7 @@
     <div class="about-text reveal">
       <p>I'm a <strong>BCA graduate from Gujarat University</strong> with a passion for building engaging, interactive applications. My journey spans game development with <strong>Unity Engine</strong>, Android app development, and modern web technologies.</p>
       <p>I developed a <strong>Firebase-backed E-Attendance System</strong> — a role-based Android application supporting both Student and Faculty workflows with real-time data synchronization. It demonstrates my ability to build practical, production-quality apps.</p>
-      <p>As a self-driven learner, I'm actively expanding into <strong>advanced Unity game development</strong> and <strong>Laravel</strong>, always pushing to level up my technical stack. I'm eager to join a forward-thinking team where I can create, contribute, and grow.</p>
+      <p>As a self-driven learner, I'm actively expanding into <strong> Unity game development</strong>, always pushing to level up my technical stack. I'm eager to join a forward-thinking team where I can create, contribute, and grow.</p>
 
       <div class="info-grid">
         <div class="info-item">
@@ -1012,6 +1185,7 @@
         <span class="tag tag-cyan">Git</span>
         <span class="tag tag-cyan">GitLab</span>
         <span class="tag tag-cyan">Firebase</span>
+        <span class="tag tag-cyan">Unity Engine</span>
       </div>
     </div>
 
