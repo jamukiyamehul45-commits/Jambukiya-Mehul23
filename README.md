@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -367,7 +366,7 @@
   #about { background: var(--bg2); }
   .about-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 60px;
     align-items: start;
   }
@@ -379,7 +378,7 @@
   }
   .about-text p strong { color: var(--accent); font-weight: 600; }
 
-  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+  .info-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; margin-top: 32px; }
   .info-item {
     background: var(--panel);
     border: 1px solid var(--border);
@@ -461,12 +460,21 @@
     color: var(--text);
     margin-top: 2px;
   }
+  .contact-link {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .contact-link:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
 
   /* SKILLS */
   #skills { background: var(--bg); }
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px;
   }
   .skill-card {
@@ -475,8 +483,10 @@
     padding: 28px;
     position: relative;
     overflow: hidden;
+    min-width: 0;
     transition: transform 0.3s, border-color 0.3s;
   }
+  .skill-card-wide { grid-column: span 2; }
   .skill-card:hover {
     transform: translateY(-4px);
     border-color: rgba(0,229,255,0.4);
@@ -561,7 +571,7 @@
   #projects { background: var(--bg2); }
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 28px;
   }
   .project-card {
@@ -569,6 +579,7 @@
     border: 1px solid var(--border);
     position: relative;
     overflow: hidden;
+    min-width: 0;
     transition: transform 0.3s, border-color 0.3s;
   }
   .project-card:hover {
@@ -748,7 +759,7 @@
 
   /* SOFT SKILLS */
   #soft-skills { background: var(--bg2); }
-  .soft-skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .soft-skills-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
   .soft-card {
     background: var(--panel);
     border: 1px solid var(--border);
@@ -757,6 +768,7 @@
     transition: all 0.3s;
     position: relative;
     overflow: hidden;
+    min-width: 0;
   }
   .soft-card:hover {
     border-color: rgba(0,229,255,0.4);
@@ -836,16 +848,21 @@
     .nav-links { display: none; }
     section { padding: 80px 24px; }
     #hero { padding: 120px 24px 60px; }
-    .about-grid { grid-template-columns: 1fr; }
-    .skills-grid { grid-template-columns: 1fr 1fr; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .soft-skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-grid { grid-template-columns: minmax(0, 1fr); }
+    .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .skill-card-wide { grid-column: span 2; }
+    .projects-grid { grid-template-columns: minmax(0, 1fr); }
+    .soft-skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
   @media (max-width: 560px) {
-    .skills-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: minmax(0, 1fr); }
+    .skill-card-wide { grid-column: auto; }
     .hero-stats { gap: 24px; }
-    .info-grid { grid-template-columns: 1fr; }
-    .soft-skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .info-grid { grid-template-columns: minmax(0, 1fr); }
+    .soft-skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 420px) {
+    .soft-skills-grid { grid-template-columns: minmax(0, 1fr); }
   }
 
   /* HERO IMAGE DESIGN */
@@ -1002,7 +1019,7 @@
       </div>
 
       <div class="hero-buttons">
-        <a href="mailto:jamukiyamehul23@gmail.com" class="btn btn-primary">⚡ Hire Me</a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=jamukiyamehul23@gmail.com&su=Job%20Opportunity&body=Hi%20Mehul%2C%0A%0A" target="_blank" rel="noopener noreferrer" class="btn btn-primary">⚡ Hire Me</a>
         <a href="#projects" class="btn btn-outline">▶ View Work</a>
       </div>
     </div>
@@ -1080,18 +1097,25 @@
         <div class="contact-icon">💼</div>
         <div>
           <div class="contact-info-label">LinkedIn</div>
-          <div class="contact-info-val">Jambukiya Mehul</div>
+          <div class="contact-info-val"><a href="https://www.linkedin.com/in/jambukiya-mehul-38909132a/" target="_blank" rel="noopener noreferrer" class="contact-link">Jambukiya Mehul</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🐙</div>
+        <div>
+          <div class="contact-info-label">GitHub</div>
+          <div class="contact-info-val"><a href="https://github.com/mehul-code2005" target="_blank" rel="noopener noreferrer" class="contact-link">mehul-code2005</a></div>
         </div>
       </div>
       <div class="contact-item">
         <div class="contact-icon">🦊</div>
         <div>
           <div class="contact-info-label">GitLab</div>
-          <div class="contact-info-val">Jambukiya Mehul</div>
+          <div class="contact-info-val"><a href="https://gitlab.com/mehuljambukiya" target="_blank" rel="noopener noreferrer" class="contact-link">mehuljambukiya</a></div>
         </div>
       </div>
       <div style="margin-top: 28px;">
-        <a href="mailto:jamukiyamehul23@gmail.com" class="btn btn-primary" style="width:100%; justify-content:center;">Send Message ➜</a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=jamukiyamehul23@gmail.com&su=Portfolio%20Inquiry&body=Hi%20Mehul%2C%0A%0A" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%; justify-content:center;">Send Message ➜</a>
       </div>
     </div>
   </div>
@@ -1141,7 +1165,7 @@
       </div>
     </div>
 
-    <div class="skill-card reveal" style="grid-column: span 2;">
+    <div class="skill-card skill-card-wide reveal">
       <span class="skill-card-icon">💻</span>
       <div class="skill-card-title">Programming Languages</div>
       <div class="skill-bar-list">
@@ -1328,7 +1352,7 @@
 <footer>
   <div class="footer-logo">MEHUL JAMBUKIYA</div>
   <div class="footer-sub">Unity Developer · Android · Web</div>
-  <p class="footer-cta">Looking for a dedicated developer? <a href="mailto:jamukiyamehul23@gmail.com">Let's connect →</a></p>
+  <p class="footer-cta">Looking for a dedicated developer? <a href="https://mail.google.com/mail/?view=cm&fs=1&to=jamukiyamehul23@gmail.com&su=Portfolio%20Inquiry&body=Hi%20Mehul%2C%0A%0A" target="_blank" rel="noopener noreferrer">Let's connect →</a></p>
   <div class="footer-copy">© 2026 Mehul Jambukiya · Ahmedabad, Gujarat · All Systems Go</div>
 </footer>
 
